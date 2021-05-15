@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CsvHelper;
 using System.IO;
 using System.Globalization;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -127,7 +128,23 @@ namespace ThirdParty
                     csvWriter.WriteRecords(exportFilePath);
                 }
             }
+
+            string exportPath = @"C:\Users\K.R.DHASHNIGA\source\repos\ThirdParty\ThirdParty\Details.json";
+            if (File.Exists(exportPath))
+            {
+                Newtonsoft.Json.JsonSerializer ser = new Newtonsoft.Json.JsonSerializer();
+                using (var writer = new StreamWriter(exportFilePath))
+                using (JsonWriter jsonWriter = new JsonTextWriter(writer))
+                {
+                    // Storing all the details of the contacts into a list
+                    
+                    ser.Serialize(writer, List);
+                }
+
+            }
+           
         }
-        
     }
+        
+    
 }

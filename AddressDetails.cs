@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using CsvHelper;
+using Newtonsoft.Json;
 using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
@@ -444,8 +445,31 @@ namespace ThirdParty
                 }
             }
         }
+
+        /// <summary>
+        /// UC15 Ability to read or write  the address book with person contact as Jsonfile.
+        /// </summary>
+        public void JsonReadAllText()
+        {
+            //Initializing variable to store file path.
+            string importFilePath = @"C:\Users\dheer1998meena\source\repos\AddressBookSystemFileIO_Day-21\AddressBookSystemFileIO_Day-21\Json\export.json";
+            IList<Person> lists = JsonConvert.DeserializeObject<List<Person>>(File.ReadAllText(importFilePath));
+            //Iterating using foreach loop contact data in lists.
+            foreach (Person contact in lists)
+            {
+                Console.WriteLine("Name :" + contact.firstName);
+                Console.WriteLine("Address :" + contact.address);
+                Console.WriteLine("City :" + contact.city);
+                Console.WriteLine("State :" + contact.state);
+                Console.WriteLine("Zip :" + contact.zip);
+                Console.WriteLine("Contact no. :" + contact.phoneNumber);
+                Console.WriteLine("Email :" + contact.email);
+                Console.WriteLine();
+            }
+        }
     }
 }
+
    
 
 
